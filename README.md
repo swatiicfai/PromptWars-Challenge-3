@@ -1,9 +1,10 @@
 # 🌿 Terralife — Carbon Footprint Awareness Platform
 
-> **PromptWars Challenge 3 Submission** | Built with Google Cloud Run, Google Fonts, Chart.js, and modern Web APIs
+> **PromptWars Challenge 3 Submission** | Built with Google Fonts, Chart.js, and modern Web APIs
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Google%20Cloud%20Run-4285F4?style=for-the-badge&logo=google-cloud)](https://terralife-[hash]-uc.a.run.app)
+[![Live Demo](https://img.shields.io/badge/🌍%20Live%20Demo-GitHub%20Pages-22c55e?style=for-the-badge&logo=github)](https://swatiicfai.github.io/PromptWars-Challenge-3)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/swatiicfai/PromptWars-Challenge-3)
+[![Deploy](https://github.com/swatiicfai/PromptWars-Challenge-3/actions/workflows/deploy.yml/badge.svg)](https://github.com/swatiicfai/PromptWars-Challenge-3/actions/workflows/deploy.yml)
 
 ---
 
@@ -40,10 +41,17 @@ Terralife is a premium, interactive Carbon Footprint Awareness Platform that emp
 - Confetti celebrations for completing high-impact actions
 
 ### 🏆 Gamified Challenges & Badges
-- 4 structured challenges with progress tracking
-- Unlockable achievement badges
+- **7 structured challenges** with progress tracking:
+  - Solar Sovereign, Commuter Shield, Green Fork, Eco Champion
+  - Zero Waste Week, Shower Saver, Energy Ninja *(new!)*
+- Unlockable achievement badges (8 total)
 - XP leveling system (Eco-Hero ranks)
 - Visual badge shelf with locked/unlocked states
+
+### 📤 Export & Share
+- **Export PDF** — print-optimised report layout
+- **Export JSON** — full data snapshot download
+- **Social Share** — Web Share API on mobile, Twitter/X card on desktop
 
 ### 🔄 Carbon Swap Simulator
 - Interactive sliders showing impact of lifestyle swaps
@@ -86,6 +94,18 @@ Terralife is a premium, interactive Carbon Footprint Awareness Platform that emp
 
 ---
 
+## 🚀 One-Click Live Demo Setup (GitHub Pages)
+
+> **Your demo link:** `https://swatiicfai.github.io/PromptWars-Challenge-3`
+
+To activate it (one-time, 30 seconds):
+1. Go to **[Repository Settings → Pages](https://github.com/swatiicfai/PromptWars-Challenge-3/settings/pages)**
+2. Under **Source**, select **GitHub Actions**
+3. Click **Save**
+4. The GitHub Action will auto-deploy and your link goes live! ✅
+
+---
+
 ## 🏃‍♀️ Running Locally
 
 ```bash
@@ -93,11 +113,9 @@ Terralife is a premium, interactive Carbon Footprint Awareness Platform that emp
 git clone https://github.com/swatiicfai/PromptWars-Challenge-3.git
 cd PromptWars-Challenge-3
 
-# Install dependencies
-npm install
-
-# Start local server
-npm start
+# No build needed — open index.html directly in browser
+# OR start a quick Python server:
+python -m http.server 8080
 
 # Open http://localhost:8080
 ```
