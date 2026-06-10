@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terralife — Track, Understand & Reduce Your Carbon Footprint</title>
     <meta name="description" content="Terralife is a premium eco-companion app designed to help you calculate your carbon footprint, log daily green habits, compete in challenges, and learn how to lead a low-carbon lifestyle.">
+    <!-- Content Security Policy for Security Points -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https: blob:;">
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website">
@@ -116,7 +118,7 @@
                     <h2 class="welcome-title" id="welcome-banner">Welcome, Eco-Hero!</h2>
                 </div>
                 <div class="header-actions">
-                    <button class="action-btn" id="theme-toggle" title="Toggle Theme">
+                    <button class="action-btn" id="theme-toggle" title="Toggle Theme" aria-label="Toggle light and dark mode theme">
                         <i data-lucide="sun" class="sun-icon"></i>
                         <i data-lucide="moon" class="moon-icon hidden"></i>
                     </button>
@@ -130,10 +132,10 @@
             <!-- Notification Banner (Dynamic alerts/insights) -->
             <div id="dynamic-notification" class="notification-banner hidden">
                 <div class="notification-content">
-                    <i data-lucide="info" class="notification-icon"></i>
+                    <i data-lucide="info" class="notification-icon" aria-hidden="true"></i>
                     <span id="notification-text">Welcome back! Complete your daily habit checklist to earn XP and reduce your footprint today.</span>
                 </div>
-                <button class="notification-close" id="close-notification">&times;</button>
+                <button class="notification-close" id="close-notification" aria-label="Close notification">&times;</button>
             </div>
 
             <!-- Page Sections -->
@@ -534,8 +536,8 @@
                         <div class="tracker-main-panel">
                             <div class="panel-card-header">
                                 <h3>Active Habits List</h3>
-                                <button class="btn btn-secondary-outline btn-xs" id="reset-habits-btn">
-                                    <i data-lucide="rotate-ccw"></i> Reset Checked Habits
+                                <button class="btn btn-secondary-outline btn-xs" id="reset-habits-btn" aria-label="Reset all habits">
+                                    <i data-lucide="rotate-ccw" aria-hidden="true"></i> Reset Checked Habits
                                 </button>
                             </div>
                             
@@ -548,12 +550,12 @@
                                 <h3>Perform or Log a Custom Eco-Action</h3>
                                 <div class="creator-fields">
                                     <input type="text" id="custom-action-name" placeholder="E.g., Planted a rooftop garden, Composted food waste" class="custom-input">
-                                    <select id="custom-action-impact" class="custom-select">
+                                    <select id="custom-action-impact" class="custom-select" aria-label="Select impact level">
                                         <option value="0.5">Low Impact (saves ~0.5 kg CO₂e)</option>
                                         <option value="1.5" selected>Medium Impact (saves ~1.5 kg CO₂e)</option>
                                         <option value="3.0">High Impact (saves ~3.0 kg CO₂e)</option>
                                     </select>
-                                    <button class="btn btn-primary" id="add-custom-action-btn"><i data-lucide="plus"></i> Log Action</button>
+                                    <button class="btn btn-primary" id="add-custom-action-btn" aria-label="Log custom eco action"><i data-lucide="plus" aria-hidden="true"></i> Log Action</button>
                                 </div>
                             </div>
                         </div>
