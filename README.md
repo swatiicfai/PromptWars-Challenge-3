@@ -8,6 +8,14 @@
 
 ---
 
+## 📸 App Screenshots
+
+| Dashboard | Interactive Calculator |
+|:---:|:---:|
+| <img src="./screenshots/dashboard.png" width="400" alt="Terralife Dashboard" /> | <img src="./screenshots/calculator.png" width="400" alt="Terralife Calculator" /> |
+
+---
+
 ## 🌍 Problem Statement
 
 **Design a solution that helps individuals understand, track, and reduce their carbon footprint through simple actions and personalized insights.**
