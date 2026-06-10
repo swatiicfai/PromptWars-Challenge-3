@@ -1,0 +1,12 @@
+{
+  "name": "terralife",
+  "version": "1.0.0",
+  "description": "Terralife Carbon Footprint Tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
