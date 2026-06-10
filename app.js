@@ -96,6 +96,48 @@ let appState = {
             target: 2,
             isJoined: false,
             isCompleted: false
+        },
+        {
+            id: "zero-waste-week",
+            title: "Zero Waste Week",
+            desc: "Log 'Avoided single-use plastics' 7 times — build a habit that lasts a lifetime!",
+            xpReward: 300,
+            co2Reward: 420,
+            badgeId: "badge-zerowaste",
+            badgeName: "Zero Waste Warrior",
+            icon: "recycle",
+            progress: 0,
+            target: 7,
+            isJoined: false,
+            isCompleted: false
+        },
+        {
+            id: "shower-saver",
+            title: "Shower Saver",
+            desc: "Log 'Shower under 5 minutes' 5 times — every minute of hot water you save matters.",
+            xpReward: 150,
+            co2Reward: 180,
+            badgeId: "badge-shower",
+            badgeName: "Aqua Sentinel",
+            icon: "droplets",
+            progress: 0,
+            target: 5,
+            isJoined: false,
+            isCompleted: false
+        },
+        {
+            id: "energy-ninja",
+            title: "Energy Ninja",
+            desc: "Log 'Unplug standby electronics' 5 times — phantom power is a sneaky emissions source.",
+            xpReward: 180,
+            co2Reward: 200,
+            badgeId: "badge-energyninja",
+            badgeName: "Energy Ninja",
+            icon: "zap-off",
+            progress: 0,
+            target: 5,
+            isJoined: false,
+            isCompleted: false
         }
     ],
     unlockedBadges: [],
@@ -276,6 +318,27 @@ const BADGE_CONFIG = {
         desc: "Unlocked by scoring 5/5 on the daily eco-trivia quiz.",
         icon: "brain",
         class: "gold-badge"
+    },
+    "badge-zerowaste": {
+        id: "badge-zerowaste",
+        name: "Zero Waste Warrior",
+        desc: "Unlocked by avoiding single-use plastics 7 times.",
+        icon: "recycle",
+        class: "gold-badge"
+    },
+    "badge-shower": {
+        id: "badge-shower",
+        name: "Aqua Sentinel",
+        desc: "Unlocked by taking short showers 5 times.",
+        icon: "droplets",
+        class: ""
+    },
+    "badge-energyninja": {
+        id: "badge-energyninja",
+        name: "Energy Ninja",
+        desc: "Unlocked by unplugging standby electronics 5 times.",
+        icon: "zap-off",
+        class: ""
     }
 };
 
@@ -311,6 +374,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 9. Init Theme Toggle
     initTheme();
+
+    // 10. Init Export & Share
+    initExportShare();
+
+    // 11. Init Mobile Sidebar Toggle
+    initMobileSidebar();
     
     // Auto-update Lucide Icons
     lucide.createIcons();
@@ -1867,4 +1936,141 @@ function showQuizResults() {
     }
 
     saveStateToStorage();
+}
+
+// ====================================================
+// EXPORT REPORT & SOCIAL SHARE
+// ====================================================
+function initExportShare() {
+    // Export PDF Button
+    const pdfBtn = document.getElementById("export-pdf-btn");
+    if (pdfBtn) {
+        pdfBtn.addEventListener("click", exportReportAsPDF);
+    }
+
+    // Export JSON Button
+    const jsonBtn = document.getElementById("export-json-btn");
+    if (jsonBtn) {
+        jsonBtn.addEventListener("click", exportReportAsJSON);
+    }
+
+    // Share Button
+    const shareBtn = document.getElementById("share-impact-btn");
+    if (shareBtn) {
+        shareBtn.addEventListener("click", shareMyImpact);
+    }
+
+    // Export dropdown toggle
+    const exportToggle = document.getElementById("export-dropdown-toggle");
+    const exportDropdown = document.getElementById("export-dropdown-menu");
+    if (exportToggle && exportDropdown) {
+        exportToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            exportDropdown.classList.toggle("open");
+        });
+        document.addEventListener("click", () => {
+            exportDropdown.classList.remove("open");
+        });
+    }
+}
+
+function exportReportAsPDF() {
+    // Trigger print dialog (we have @media print styles in CSS)
+    triggerNotification("📄 Opening print dialog. Tip: Set destination to 'Save as PDF'.", "file-text");
+    setTimeout(() => window.print(), 500);
+}
+
+function exportReportAsJSON() {
+    const report = {
+        generatedAt: new Date().toISOString(),
+        user: { ...appState.user },
+        footprint: { ...appState.calculator.footprints },
+        inputs: { ...appState.calculator.inputs },
+        dailySaved: {
+            totalCO2Saved_kg: appState.user.totalSavedCo2,
+            customActions: appState.customActions
+        },
+        unlockedBadges: appState.unlockedBadges,
+        challenges: appState.challenges.map(c => ({
+            id: c.id,
+            title: c.title,
+            isJoined: c.isJoined,
+            isCompleted: c.isCompleted,
+            progress: c.progress,
+            target: c.target
+        }))
+    };
+
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `terralife-report-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    triggerNotification("✅ JSON report downloaded successfully!", "download");
+}
+
+function shareMyImpact() {
+    const total = appState.calculator.footprints.total;
+    const saved = appState.user.totalSavedCo2;
+    const level = appState.user.level;
+    const badges = appState.unlockedBadges.length;
+
+    const text = total > 0
+        ? `🌍 My annual carbon footprint is ${total} tonnes CO₂e — that's ${total < 4 ? 'below' : 'above'} the 2.0t global target. I've saved ${saved.toFixed(1)}kg CO₂e and earned ${badges} eco-badge${badges !== 1 ? 's' : ''} on @TerralifePlatform! #CarbonFootprint #ClimateAction`
+        : `🌱 I'm tracking my carbon footprint on Terralife (Level ${level} Eco-Hero) — a free tool to measure, reduce & game-ify your climate impact! #Sustainability #EcoLife`;
+
+    const url = "https://terralife.web.app";
+
+    if (navigator.share) {
+        navigator.share({
+            title: "My Terralife Carbon Impact Report",
+            text: text,
+            url: url
+        }).catch(() => {
+            // User cancelled or error — fallback to Twitter
+            openTwitterShare(text, url);
+        });
+    } else {
+        openTwitterShare(text, url);
+    }
+}
+
+function openTwitterShare(text, url) {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(twitterUrl, "_blank", "width=600,height=400");
+}
+
+// ====================================================
+// MOBILE SIDEBAR TOGGLE
+// ====================================================
+function initMobileSidebar() {
+    const hamburger = document.getElementById("mobile-menu-toggle");
+    const sidebar = document.querySelector(".sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    if (hamburger && sidebar) {
+        hamburger.addEventListener("click", () => {
+            sidebar.classList.toggle("mobile-open");
+            if (overlay) overlay.classList.toggle("visible");
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener("click", () => {
+            sidebar.classList.remove("mobile-open");
+            overlay.classList.remove("visible");
+        });
+    }
+
+    // Close sidebar after clicking a nav link on mobile
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove("mobile-open");
+                if (overlay) overlay.classList.remove("visible");
+            }
+        });
+    });
 }
