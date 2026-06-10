@@ -14,6 +14,14 @@
 |:---:|:---:|
 | <img src="./screenshots/dashboard.png" width="400" alt="Terralife Dashboard" /> | <img src="./screenshots/calculator.png" width="400" alt="Terralife Calculator" /> |
 
+| Daily Habits | Challenges |
+|:---:|:---:|
+| <img src="./screenshots/daily-habits.png" width="400" alt="Daily Habits" /> | <img src="./screenshots/challenges.png" width="400" alt="Challenges" /> |
+
+| Eco Hub |
+|:---:|
+| <img src="./screenshots/eco-hub.png" width="400" alt="Eco Hub" /> |
+
 ---
 
 ## 🌍 Problem Statement
