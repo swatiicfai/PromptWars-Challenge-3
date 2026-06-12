@@ -3,3 +3,7 @@ node_modules/
 .DS_Store
 .env*
 .gemini/
+Presentation_Output/
+*.mp4
+*.pptx
+coverage/
