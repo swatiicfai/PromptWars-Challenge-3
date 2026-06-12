@@ -2,9 +2,8 @@
 
 > **PromptWars Challenge 3 Submission** | Built with Google Fonts, Chart.js, and modern Web APIs
 
-[![Live Demo](https://img.shields.io/badge/🌍%20Live%20Demo-GitHub%20Pages-22c55e?style=for-the-badge&logo=github)](https://swatiicfai.github.io/PromptWars-Challenge-3)
+[![Live Demo](https://img.shields.io/badge/🌍%20Live%20Demo-Cloud%20Run-4285F4?style=for-the-badge&logo=googlecloud)](https://named-deck-495705-v6-419483798137.us-central1.run.app)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/swatiicfai/PromptWars-Challenge-3)
-[![Deploy](https://github.com/swatiicfai/PromptWars-Challenge-3/actions/workflows/deploy.yml/badge.svg)](https://github.com/swatiicfai/PromptWars-Challenge-3/actions/workflows/deploy.yml)
 
 ---
 
@@ -82,6 +81,31 @@ Terralife is a premium, interactive Carbon Footprint Awareness Platform that emp
 
 ---
 
+## 🏗️ Project Architecture Flowchart
+
+```mermaid
+flowchart TD
+    User([User]) -->|Accesses Platform| App[Terralife Application]
+    
+    subgraph Frontend [Frontend Components]
+        App --> Calc[Carbon Calculator]
+        App --> Dash[Dashboard & Charts]
+        App --> Habits[Habits Tracker]
+    end
+
+    subgraph Infrastructure [Google Cloud Infrastructure]
+        App -.->|Served by| CR[Cloud Run]
+        CR -.->|Built via| CB[Cloud Build]
+        CB -.->|Container stored in| AR[Artifact Registry]
+    end
+
+    classDef default fill:#1E293B,stroke:#38BDF8,stroke-width:1px,color:#fff;
+    classDef gcp fill:#0F172A,stroke:#10B981,stroke-width:2px,color:#fff;
+    class CR,CB,AR gcp;
+```
+
+---
+
 ## 🛠️ Technology Stack
 
 | Layer | Technology |
@@ -110,15 +134,11 @@ Terralife is a premium, interactive Carbon Footprint Awareness Platform that emp
 
 ---
 
-## 🚀 One-Click Live Demo Setup (GitHub Pages)
+## 🚀 Live Deployment
 
-> **Your demo link:** `https://swatiicfai.github.io/PromptWars-Challenge-3`
+> **Your live Cloud Run URL:** [https://named-deck-495705-v6-419483798137.us-central1.run.app](https://named-deck-495705-v6-419483798137.us-central1.run.app)
 
-To activate it (one-time, 30 seconds):
-1. Go to **[Repository Settings → Pages](https://github.com/swatiicfai/PromptWars-Challenge-3/settings/pages)**
-2. Under **Source**, select **GitHub Actions**
-3. Click **Save**
-4. The GitHub Action will auto-deploy and your link goes live! ✅
+The application is fully containerized using Docker and deployed seamlessly on **Google Cloud Run**, built via **Google Cloud Build**, and stored in **Google Artifact Registry**.
 
 ---
 
