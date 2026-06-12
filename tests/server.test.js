@@ -19,7 +19,7 @@ describe('Server Tests', () => {
 
   it('should include CORS headers', async () => {
     const res = await request(app).get('/');
-    expect(res.headers['access-control-allow-origin']).toBe('*');
+    expect(res.headers['access-control-allow-origin']).toBe('https://named-deck-495705-v6-419483798137.us-central1.run.app');
   });
 
   it('should handle missing routes by serving index.html (SPA behavior)', async () => {

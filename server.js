@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8080;
  * Security Middlewares
  */
 // 1. Helmet helps secure Express apps by setting various HTTP headers
+app.set('trust proxy', 1); // Trust first proxy for rate limiting behind Cloud Run
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -19,11 +20,10 @@ app.use(
         defaultSrc: ["'self'"],
         scriptSrc: [
           "'self'",
-          "'unsafe-inline'",
           "https://unpkg.com",
           "https://cdn.jsdelivr.net",
         ],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com"],
         fontSrc: ["'self'", "https://fonts.gstatic.com"],
         imgSrc: ["'self'", "data:", "https:", "blob:"],
         connectSrc: ["'self'"],
@@ -32,8 +32,8 @@ app.use(
   }),
 );
 
-// 2. Enable CORS
-app.use(cors());
+// 2. Enable CORS restricted to origin
+app.use(cors({ origin: 'https://named-deck-495705-v6-419483798137.us-central1.run.app' }));
 
 // 3. Rate limiting (prevent DDoS / brute force)
 const limiter = rateLimit({

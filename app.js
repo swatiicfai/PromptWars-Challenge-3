@@ -2,7 +2,11 @@
    TERRALIFE CORE APPLICATION CONTROLLER & LOGIC
    ==================================================== */
 
-// State Management Container
+/**
+ * Application State Management Container
+ * Holds user progress, footprint data, and UI state.
+ * @type {Object}
+ */
 let appState = {
   user: {
     name: "Swati Gupta",
@@ -764,6 +768,11 @@ function initCalculator() {
 }
 
 // Standard Calculation Formula
+/**
+ * Calculates the monthly carbon footprint based on user inputs.
+ * @param {Object} inputs - User activity inputs (transport, diet, energy).
+ * @returns {Object} Calculated footprint breakdown (transport, diet, energy, total).
+ */
 function calculateFootprint(inputs) {
   let transport = 0;
   let energy = 0;
@@ -2237,6 +2246,4 @@ function initMobileSidebar() {
   });
 }
 
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = { appState, calculateFootprint };
-}
+if (typeof module !== 'undefined' && module.exports) { module.exports = { appState, calculateFootprint, gainXP }; }

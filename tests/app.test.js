@@ -1,4 +1,4 @@
-const { appState, calculateFootprint } = require("../app.js");
+const { appState, calculateFootprint, gainXP } = require("../app.js");
 
 describe("App Logic Tests", () => {
   beforeEach(() => {
